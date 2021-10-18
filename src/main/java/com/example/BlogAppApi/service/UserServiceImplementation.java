@@ -160,6 +160,24 @@ public class UserServiceImplementation implements UserService,GroupService, User
         return checkUser;
     }
 
+    public UserModel getUserByName(String name) {
+
+        /*
+         * searches the database and returns the desired user if found,
+         * if not throws an exception
+         * */
+
+        UserModel checkUser = userModelRepository.findUserModelByUserName(name);
+        try{
+            if (checkUser == null){
+                throw new Exception("No user by this name is found");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return checkUser;
+    }
+
     @Override
     public List<UserModel> getUsers() {
 
@@ -654,5 +672,6 @@ public class UserServiceImplementation implements UserService,GroupService, User
             return checkGroups;
         }
     }
+
 
 }
